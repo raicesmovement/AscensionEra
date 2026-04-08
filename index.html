@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ascension Era</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --gold:#C9A84C;
+  --gold-light:#E8C87A;
+  --gold-pale:#FDF3DC;
+  --gold-dim:#9A7A3A;
+  --ember:#C4622A;
+  --ember-light:#E8915A;
+  --sage:#7A9E8C;
+  --sage-light:#B8D4C8;
+  --sage-dark:#4A6B5E;
+  --bone:#F4EFE6;
+  --bone-dim:#D4CAB8;
+  --earth:#2C2018;
+  --earth-mid:#3D2E1C;
+  --earth-lift:#52402A;
+  --earth-surface:#6B5438;
+  --stone:#8C7A62;
+  --stone-light:#B8A890;
+  --cream:#FAF6EF;
+  --dusk:#1E1A28;
+  --twilight:#2E2840;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--earth);overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1rem 3rem;background:rgba(250,246,239,0.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(201,168,76,0.2);}
+.nav-mark{font-family:'Cinzel',serif;font-size:0.82rem;font-weight:600;letter-spacing:0.24em;text-transform:uppercase;color:var(--earth);}
+nav ul{display:flex;gap:2rem;list-style:none;}
+nav a{font-size:0.65rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--stone);text-decoration:none;transition:color 0.2s;}
+nav a:hover{color:var(--earth);}
+.nav-shop{color:var(--gold-dim)!important;border-bottom:1px solid rgba(201,168,76,0.4);padding-bottom:1px;}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8rem 3rem 6rem;position:relative;overflow:hidden;background:var(--cream);}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 50% 30%,rgba(201,168,76,0.08) 0%,rgba(122,158,140,0.05) 50%,transparent 75%);pointer-events:none;}
+
+.moon-arc{position:absolute;top:8%;left:50%;transform:translateX(-50%);display:flex;justify-content:center;gap:2rem;align-items:center;opacity:0.2;pointer-events:none;}
+.moon-dot{border-radius:50%;background:var(--gold-dim);flex-shrink:0;}
+.md1,.md7{width:6px;height:6px;}
+.md2,.md6{width:10px;height:10px;}
+.md3,.md5{width:14px;height:14px;}
+.md4{width:18px;height:18px;}
+
+.hero-eyebrow{font-size:0.6rem;letter-spacing:0.32em;text-transform:uppercase;color:var(--sage-dark);margin-bottom:2.5rem;position:relative;z-index:1;}
+.hero-logo{width:min(260px,55vw);margin-bottom:2.5rem;position:relative;z-index:1;animation:floatLogo 7s ease-in-out infinite;}
+@keyframes floatLogo{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+.hero-wordmark{font-family:'Cinzel',serif;font-size:clamp(0.9rem,1.8vw,1.2rem);font-weight:400;letter-spacing:0.5em;text-transform:uppercase;color:var(--earth);margin-bottom:0.4rem;position:relative;z-index:1;}
+.hero-wordmark-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(0.9rem,1.4vw,1.1rem);color:var(--gold-dim);margin-bottom:2.5rem;position:relative;z-index:1;}
+.hero-rule{display:flex;align-items:center;gap:1rem;justify-content:center;margin-bottom:2.5rem;position:relative;z-index:1;}
+.hero-rule::before,.hero-rule::after{content:'';display:block;width:3rem;height:1px;background:var(--gold-dim);opacity:0.5;}
+.hero-rule span{font-size:0.55rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--stone);}
+.hero-desc{font-size:0.98rem;line-height:2;font-weight:300;color:var(--earth-lift);max-width:46ch;margin:0 auto 3rem;position:relative;z-index:1;}
+.hero-cta-row{display:flex;gap:1.25rem;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;margin-bottom:2.5rem;}
+.btn-warm{display:inline-block;padding:1rem 2.5rem;background:var(--earth);color:var(--bone);font-family:'Cinzel',serif;font-size:0.7rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;text-decoration:none;transition:all 0.25s;}
+.btn-warm:hover{background:var(--earth-lift);transform:translateY(-2px);}
+.btn-outline{display:inline-block;padding:1rem 2.5rem;background:transparent;color:var(--earth-lift);font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;text-decoration:none;border:1px solid var(--stone-light);transition:all 0.25s;}
+.btn-outline:hover{border-color:var(--gold-dim);color:var(--gold-dim);}
+.hero-ig{font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--stone);position:relative;z-index:1;}
+.hero-ig a{color:var(--gold-dim);text-decoration:none;border-bottom:1px solid rgba(154,122,58,0.4);transition:color 0.2s;}
+.hero-ig a:hover{color:var(--ember);}
+
+/* STRIP */
+.strip{background:var(--earth);color:var(--bone);padding:0.9rem 0;overflow:hidden;}
+.strip-inner{display:flex;gap:3rem;animation:marquee 38s linear infinite;white-space:nowrap;align-items:center;}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.strip-text{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;font-weight:300;flex-shrink:0;color:var(--bone-dim);}
+.strip-glyph{color:var(--gold);flex-shrink:0;font-size:0.55rem;}
+
+/* SHARED */
+.section-label{font-size:0.6rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--sage-dark);margin-bottom:1.25rem;}
+h2{font-family:'Cinzel',serif;font-size:clamp(1.6rem,2.8vw,2.4rem);font-weight:600;letter-spacing:0.06em;text-transform:uppercase;line-height:1.25;margin-bottom:1.5rem;color:var(--earth);}
+h2 em{font-style:normal;color:var(--gold-dim);}
+.body-p{font-size:0.92rem;line-height:1.95;font-weight:300;color:var(--earth-lift);margin-bottom:1rem;}
+.body-p:last-of-type{margin-bottom:0;}
+
+/* PHILOSOPHY */
+.philosophy{padding:7rem 4rem;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start;}
+.philosophy-text h2{margin-bottom:1.25rem;}
+.tenets{display:flex;flex-direction:column;gap:0;}
+.tenet{padding:1.5rem 0;border-bottom:1px solid rgba(154,122,58,0.15);display:flex;gap:1.25rem;align-items:flex-start;}
+.tenet:first-child{border-top:1px solid rgba(154,122,58,0.15);}
+.tenet-num{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;font-style:italic;color:var(--gold-dim);line-height:1;flex-shrink:0;width:2rem;}
+.tenet-body h4{font-family:'Cinzel',serif;font-size:0.72rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--earth);margin-bottom:0.35rem;}
+.tenet-body p{font-size:0.8rem;line-height:1.75;font-weight:300;color:var(--stone);}
+
+/* BRAND STATEMENT */
+.brand-statement{background:var(--earth);color:var(--bone);padding:6rem 4rem;}
+.brand-statement-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;}
+.brand-statement .section-label{color:var(--gold-light);margin-bottom:2rem;}
+.brand-statement p{font-size:0.92rem;line-height:2;font-weight:300;color:rgba(244,239,230,0.7);margin-bottom:1rem;}
+.brand-statement p:last-of-type{margin-bottom:0;}
+.brand-statement .highlight{color:var(--bone);font-style:italic;}
+
+/* COLOR LOGO */
+.logo-feature{background:var(--earth-mid);border-top:1px solid rgba(201,168,76,0.12);border-bottom:1px solid rgba(201,168,76,0.12);padding:4.5rem 4rem;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;overflow:hidden;}
+.logo-feature::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(201,168,76,0.07) 0%,transparent 70%);pointer-events:none;}
+.logo-feature img{width:min(440px,75vw);position:relative;z-index:1;}
+.logo-feature p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.85rem;letter-spacing:0.15em;color:var(--stone-light);margin-top:1.75rem;position:relative;z-index:1;}
+
+/* FOUNDERS */
+.founders{background:var(--cream);padding:7rem 4rem;border-top:1px solid rgba(154,122,58,0.12);}
+.founders-header{text-align:center;margin-bottom:4rem;}
+.founders-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:960px;margin:0 auto;}
+.founder-card{border:1px solid rgba(154,122,58,0.2);padding:2.75rem 2.5rem;background:var(--cream);position:relative;}
+.founder-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);}
+.founder-moon{font-size:1.5rem;margin-bottom:1.25rem;display:block;opacity:0.7;}
+.founder-role{font-size:0.58rem;letter-spacing:0.24em;text-transform:uppercase;color:var(--sage-dark);margin-bottom:0.85rem;}
+.founder-name{font-family:'Cinzel',serif;font-size:1.5rem;font-weight:600;letter-spacing:0.1em;color:var(--earth);margin-bottom:1.25rem;}
+.founder-card p{font-size:0.85rem;line-height:1.85;font-weight:300;color:var(--stone);margin-bottom:0.85rem;}
+.founder-card p:last-of-type{margin-bottom:0;}
+
+/* PRACTICUM ANNOUNCEMENT */
+.practicum{background:linear-gradient(135deg,var(--dusk) 0%,var(--twilight) 100%);padding:6rem 4rem;border-top:1px solid rgba(201,168,76,0.12);}
+.practicum-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1.4fr;gap:5rem;align-items:center;}
+.practicum-emblem{text-align:center;}
+.practicum-emblem .moon-phases{font-size:2rem;letter-spacing:0.3em;margin-bottom:1.5rem;display:block;opacity:0.7;}
+.practicum-emblem .coming-soon-badge{display:inline-block;font-family:'Cinzel',serif;font-size:0.62rem;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold-dim);padding:0.5rem 1.5rem;margin-bottom:1.5rem;}
+.practicum-emblem .teacher-names{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:rgba(244,239,230,0.6);line-height:1.8;}
+.practicum-text .section-label{color:var(--sage-light);}
+.practicum-text h2{color:var(--bone);font-size:clamp(1.5rem,2.5vw,2.2rem);margin-bottom:1rem;}
+.practicum-text h2 em{color:var(--gold-light);}
+.practicum-text p{font-size:0.9rem;line-height:1.95;font-weight:300;color:rgba(244,239,230,0.68);margin-bottom:1rem;}
+.practicum-text p:last-of-type{margin-bottom:0;}
+.practicum-cta{margin-top:2rem;}
+
+/* TEES */
+.tees{padding:7rem 4rem;background:var(--earth-mid);}
+.tees-header{text-align:center;margin-bottom:4rem;}
+.tees-header h2{color:var(--bone);}
+.tees-header p{font-size:0.9rem;color:var(--stone-light);font-weight:300;max-width:44ch;margin:0.75rem auto 0;}
+.tees-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;max-width:1000px;margin:0 auto 3rem;}
+.tee-card{background:var(--earth-lift);border:1px solid rgba(154,122,58,0.2);padding:2.25rem 1.75rem;transition:border-color 0.25s,transform 0.25s;position:relative;text-decoration:none;color:inherit;display:block;}
+.tee-card::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold-dim),transparent);opacity:0;transition:opacity 0.3s;}
+.tee-card:hover{border-color:rgba(201,168,76,0.45);transform:translateY(-3px);}
+.tee-card:hover::after{opacity:1;}
+.tee-glyph{font-size:1.6rem;margin-bottom:1.1rem;display:block;}
+.tee-name{font-family:'Cinzel',serif;font-size:0.92rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--bone);margin-bottom:0.4rem;line-height:1.35;}
+.tee-community{font-size:0.58rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:1rem;display:block;}
+.tee-desc{font-size:0.78rem;line-height:1.75;font-weight:300;color:var(--stone-light);}
+.tee-price{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:400;color:var(--gold-light);margin-top:1.1rem;display:flex;align-items:baseline;gap:0.5rem;}
+.tee-price small{font-size:0.62rem;letter-spacing:0.08em;color:var(--stone-light);font-family:'Jost',sans-serif;font-weight:300;}
+.tee-etsy-link{display:inline-block;margin-top:0.85rem;font-size:0.6rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold-dim);border-bottom:1px solid rgba(154,122,58,0.4);padding-bottom:1px;transition:color 0.2s,border-color 0.2s;}
+.tee-card:hover .tee-etsy-link{color:var(--gold-light);border-color:var(--gold-light);}
+.tee-coming{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;border-style:dashed;border-color:rgba(154,122,58,0.2);grid-column:span 2;}
+.tee-coming .tee-name{color:var(--stone-light);}
+.tees-cta{text-align:center;}
+.tees-note{font-size:0.7rem;color:var(--stone-light);font-weight:300;margin-top:1.25rem;font-style:italic;}
+
+/* SESSIONS */
+.sessions{padding:7rem 4rem;background:var(--cream);}
+.sessions-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;}
+.sessions-text h2{margin-bottom:1rem;}
+.session-list{display:flex;flex-direction:column;gap:0;margin-top:2rem;}
+.session-item{padding:1.25rem 0;border-bottom:1px solid rgba(154,122,58,0.12);display:flex;gap:1rem;align-items:flex-start;}
+.session-item:first-child{border-top:1px solid rgba(154,122,58,0.12);}
+.s-dot{width:5px;height:5px;border-radius:50%;background:var(--gold-dim);flex-shrink:0;margin-top:0.45rem;}
+.session-item h4{font-family:'Cinzel',serif;font-size:0.72rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--earth);margin-bottom:0.3rem;}
+.session-item p{font-size:0.8rem;line-height:1.72;font-weight:300;color:var(--stone);}
+
+/* FORM */
+.form-box{background:var(--cream);border:1px solid rgba(154,122,58,0.2);padding:2.5rem 2.25rem;}
+.form-box h3{font-family:'Cinzel',serif;font-size:1rem;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--earth);margin-bottom:0.4rem;}
+.form-box .form-sub{font-size:0.78rem;color:var(--stone);font-weight:300;margin-bottom:2rem;line-height:1.65;}
+.fg{margin-bottom:1.1rem;}
+.fg label{display:block;font-size:0.58rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:0.45rem;}
+.fg input,.fg select,.fg textarea{width:100%;background:var(--gold-pale);border:1px solid rgba(154,122,58,0.2);color:var(--earth);font-family:'Jost',sans-serif;font-size:0.83rem;font-weight:300;padding:0.72rem 0.9rem;outline:none;transition:border-color 0.2s;-webkit-appearance:none;appearance:none;}
+.fg input::placeholder,.fg textarea::placeholder{color:var(--stone-light);}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--gold-dim);}
+.fg select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239A7A3A'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;}
+.fg select option{background:var(--cream);}
+.fg textarea{resize:vertical;min-height:90px;}
+.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;}
+.btn-submit{width:100%;padding:0.95rem;background:var(--earth);color:var(--bone);font-family:'Cinzel',serif;font-size:0.7rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;border:none;cursor:pointer;margin-top:0.35rem;transition:background 0.25s;}
+.btn-submit:hover{background:var(--earth-lift);}
+.form-note{font-size:0.68rem;color:var(--stone);font-weight:300;margin-top:0.85rem;text-align:center;line-height:1.6;}
+.form-success{display:none;text-align:center;padding:2.5rem 0;}
+.form-success .fs-title{font-family:'Cinzel',serif;font-size:1.1rem;color:var(--gold-dim);letter-spacing:0.1em;display:block;margin-bottom:0.75rem;}
+.form-success p{font-size:0.82rem;color:var(--stone);font-weight:300;line-height:1.75;}
+
+/* CLOSING QUOTE */
+.roots{padding:6rem 4rem;text-align:center;background:var(--earth-mid);}
+.roots-inner{max-width:680px;margin:0 auto;}
+.roots blockquote{font-family:'Cormorant Garamond',serif;font-size:clamp(1.1rem,2vw,1.5rem);font-weight:300;font-style:italic;line-height:1.75;color:var(--bone);letter-spacing:0.03em;margin-bottom:1.5rem;}
+.roots blockquote em{color:var(--gold-light);font-style:normal;}
+.roots-attr{font-size:0.6rem;letter-spacing:0.24em;text-transform:uppercase;color:var(--stone-light);margin-bottom:2.5rem;}
+.roots-btns{display:flex;gap:1.25rem;justify-content:center;flex-wrap:wrap;}
+
+/* FOOTER */
+footer{background:var(--earth);padding:2.75rem 4rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5rem;}
+.footer-logo img{width:72px;opacity:0.55;filter:invert(1);}
+.footer-links{display:flex;flex-direction:column;gap:0.65rem;}
+.footer-links a{font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(212,202,184,0.5);text-decoration:none;transition:color 0.2s;}
+.footer-links a:hover{color:var(--gold-light);}
+.footer-copy{font-size:0.62rem;color:rgba(212,202,184,0.3);text-align:center;letter-spacing:0.1em;width:100%;border-top:1px solid rgba(255,255,255,0.05);padding-top:1.5rem;margin-top:0.5rem;}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.hero>*{opacity:0;animation:fadeUp 0.85s ease forwards;}
+.hero>*:nth-child(1){animation-delay:0s;}
+.hero>*:nth-child(2){animation-delay:0.1s;}
+.hero>*:nth-child(3){animation-delay:0.22s;}
+.hero>*:nth-child(4){animation-delay:0.32s;}
+.hero>*:nth-child(5){animation-delay:0.42s;}
+.hero>*:nth-child(6){animation-delay:0.52s;}
+.hero>*:nth-child(7){animation-delay:0.62s;}
+.hero>*:nth-child(8){animation-delay:0.72s;}
+.hero>*:nth-child(9){animation-delay:0.82s;}
+.hero::before,.moon-arc{animation:none;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-mark">Ascension Era</div>
+  <ul>
+    <li><a href="#philosophy">Philosophy</a></li>
+    <li><a href="#founders">Who We Are</a></li>
+    <li><a href="#practicum">Meditation</a></li>
+    <li><a href="#tees">The Tees</a></li>
+    <li><a href="#sessions">Sessions</a></li>
+    <li><a class="nav-shop" href="https://ascensionera.etsy.com" target="_blank">Shop Etsy ↗</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="moon-arc">
+    <div class="moon-dot md1"></div><div class="moon-dot md2"></div>
+    <div class="moon-dot md3"></div><div class="moon-dot md4"></div>
+    <div class="moon-dot md3"></div><div class="moon-dot md2"></div>
+    <div class="moon-dot md1"></div>
+  </div>
+  <div class="hero-eyebrow">Spirit-led · Shadow work · Ancestral reverence · Meditation</div>
+  <img class="hero-logo" src="ae-logo-bw.png" alt="Ascension Era"/>
+  <div class="hero-wordmark">Ascension Era</div>
+  <div class="hero-wordmark-sub">You are all the things.</div>
+  <div class="hero-rule"><span>Est. under Bloom Wellness LLC</span></div>
+  <p class="hero-desc">Wearable philosophy and spirit-led sessions for those doing the real work — shadow work, ancestral healing, and conscious living. No guru culture. No toxic positivity. No bypassing. Just truth, worn and spoken.</p>
+  <div class="hero-cta-row">
+    <a class="btn-warm" href="https://ascensionera.etsy.com" target="_blank">Shop the Collection</a>
+    <a class="btn-outline" href="#sessions">Book a Session</a>
+  </div>
+  <div class="hero-ig">Follow the journey: <a href="https://instagram.com/ascensioneraofficial" target="_blank">@ascensioneraofficial</a></div>
+</section>
+
+<div class="strip">
+  <div class="strip-inner">
+    <span class="strip-text">Shadow work</span><span class="strip-glyph">✦</span>
+    <span class="strip-text">Sacred rage</span><span class="strip-glyph">✦</span>
+    <span class="strip-text">You are the driving force</span><span class="strip-glyph">✦</span>
+    <span class="strip-text">Ancestral reverence</span><span class="strip-glyph">✦</span>
+    <span class="strip-text">No guru culture</span><span class="strip-glyph">✦</span>
+    <span class="strip-text">Authentic AF</span><span class="strip-glyph">✦</span>
+    <span class="strip-text">Heavily meditated</span><span class="strip-glyph">✦</span>
+    <span class="strip-text">IYKYK</span><span class="strip-glyph">✦</span>
+    <span class="strip-text">No bypassing</span><span class="strip-glyph">✦</span>
+    <span class="strip-text">This is reciprocity</span><span class="strip-glyph">✦</span>
+    <span class="strip-text">Full-spectrum living</span><span class="strip-glyph">✦</span>
+    <span class="strip-text">Spirit-led</span><span class="strip-glyph">✦</span>
+    <span class="strip-text">Wearable philosophy</span><span class="strip-glyph">✦</span>
+    <span class="strip-text">Shadow work</span><span class="strip-glyph">✦</span>
+    <span class="strip-text">Sacred rage</span><span class="strip-glyph">✦</span>
+    <span class="strip-text">You are the driving force</span><span class="strip-glyph">✦</span>
+    <span class="strip-text">Ancestral reverence</span><span class="strip-glyph">✦</span>
+    <span class="strip-text">No guru culture</span><span class="strip-glyph">✦</span>
+    <span class="strip-text">Authentic AF</span><span class="strip-glyph">✦</span>
+    <span class="strip-text">Heavily meditated</span><span class="strip-glyph">✦</span>
+    <span class="strip-text">IYKYK</span><span class="strip-glyph">✦</span>
+    <span class="strip-text">No bypassing</span><span class="strip-glyph">✦</span>
+    <span class="strip-text">This is reciprocity</span><span class="strip-glyph">✦</span>
+    <span class="strip-text">Full-spectrum living</span><span class="strip-glyph">✦</span>
+    <span class="strip-text">Spirit-led</span><span class="strip-glyph">✦</span>
+    <span class="strip-text">Wearable philosophy</span><span class="strip-glyph">✦</span>
+  </div>
+</div>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy" id="philosophy">
+  <div class="philosophy-text">
+    <div class="section-label">You are all the things</div>
+    <h2>We got tired of healing spaces that want healing to look <em>pretty.</em></h2>
+    <p class="body-p">Because it's not. It's grief that won't schedule itself. It's rage that doesn't look spiritual. It's the breakdown in the middle of what was supposed to be a breakthrough. It's the dark night that nobody in the room wants to acknowledge because acknowledging it would mean acknowledging it in themselves.</p>
+    <p class="body-p">So they repress it. They keep the circle light. They run from those moments, those conversations, those people who are right in the middle of the hard part. And the person in that room — the one who needed to be held — walks away feeling lost. Feeling lonely. Feeling like something is wrong with them because their healing doesn't look like the highlight reel.</p>
+    <p class="body-p">We are tired of that. We built Ascension Era because we have been that person. And we refuse to be a space that makes anyone feel that way.</p>
+    <div style="margin:2rem 0;padding:1.75rem 2rem;border:1px solid rgba(154,122,58,0.25);background:rgba(201,168,76,0.04);">
+      <p style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-style:italic;font-weight:300;color:var(--earth);line-height:1.65;margin-bottom:1rem;">Sacred rage is valid.<br>Grief is valid. Doubt is valid.<br>The darkness is part of the path.</p>
+      <p style="font-size:0.82rem;line-height:1.85;font-weight:300;color:var(--stone);">And one more thing — we are not here to save you. No one is. We are not the answer and we will never tell you we are. <strong style="font-weight:500;color:var(--earth);">You are the driving force.</strong> We are just willing to stay in the room while you remember that.</p>
+    </div>
+  </div>
+  <div class="tenets">
+    <div class="tenet">
+      <div class="tenet-num">I</div>
+      <div class="tenet-body">
+        <h4>No Guru Culture</h4>
+        <p>No one is going to save you. Not us, not a tee, not a retreat. You already hold the medicine. We just make it wearable.</p>
+      </div>
+    </div>
+    <div class="tenet">
+      <div class="tenet-num">II</div>
+      <div class="tenet-body">
+        <h4>No Bypassing</h4>
+        <p>The shadow work is part of the work. Real ascension integrates the hard parts — it doesn't skip them. We've walked through shadow work, grief, plant medicine, and the loneliness of awakening when the world around you hasn't caught up.</p>
+      </div>
+    </div>
+    <div class="tenet">
+      <div class="tenet-num">III</div>
+      <div class="tenet-body">
+        <h4>Purpose &amp; Prosperity Together</h4>
+        <p>Spiritual work is real work. Consciousness and commerce are not in conflict. You can be deeply rooted and still build something that grows.</p>
+      </div>
+    </div>
+    <div class="tenet">
+      <div class="tenet-num">IV</div>
+      <div class="tenet-body">
+        <h4>Consciousness Is a Practice</h4>
+        <p>Not a destination. Lived fully, in every direction — the meditation and the shadow work, the stillness and the becoming. Everything is working for us. Even when it's not pretty.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRAND STATEMENT -->
+<section class="brand-statement">
+  <div class="brand-statement-inner">
+    <div>
+      <div class="section-label">The path we've walked</div>
+      <p>We have walked the difficult path. Through shadow work and grief. Through plant medicine and integration. Through the loneliness of awakening when the world around you hasn't caught up — and the particular loneliness of sitting in a healing space that doesn't want to hold the hard parts of you.</p>
+      <p>Through synchronicities that made no sense until they did. Through ego and higher self. Through the moments where everything felt like it was falling apart — and the slow realization that it was <span class="highlight">actually falling into place.</span></p>
+    </div>
+    <div>
+      <p>We know what it feels like to be in a room and still feel alone. To be mid-breakdown in a space that only knows how to celebrate breakthroughs. To need someone to stay — and watch them look away instead.</p>
+      <p>Every piece in this shop carries a truth we've worn ourselves. Words that hold space for where you actually are, not where you think you should be.</p>
+      <p class="highlight" style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;line-height:1.8;">Everything is working for us. Even when it's not pretty. Welcome to the era. 🌑🌕✦</p>
+    </div>
+  </div>
+</section>
+
+<!-- COLOR LOGO -->
+<div class="logo-feature">
+  <img src="ae-logo-color.png" alt="Ascension Era — full spectrum"/>
+  <p>Full-spectrum · All phases · All of you</p>
+</div>
+
+<!-- FOUNDERS -->
+<section class="founders" id="founders">
+  <div class="founders-header">
+    <div class="section-label">Who we are</div>
+    <h2>Community members<br>doing <em>the work.</em></h2>
+    <p style="font-size:0.95rem;line-height:1.95;font-weight:300;color:var(--stone);max-width:60ch;margin:0 auto 1rem;text-align:center;">We are not gurus. We are not practitioners standing at the front of the room. We are people — in community, on the path, doing the work the same as you. We don't believe in hierarchy. We believe people are the driving force of their own journey.</p>
+    <p style="font-size:0.95rem;line-height:1.95;font-weight:300;color:var(--stone);max-width:60ch;margin:0 auto;text-align:center;">If you feel called to walk with us for part of yours — we would be honored to be a catalyst. Nothing more, nothing less.</p>
+  </div>
+  <!-- FOUNDER PHOTO -->
+  <div style="max-width:560px;margin:0 auto 3.5rem;position:relative;">
+    <img src="wendy-luis.jpeg" alt="Wendy and Luis" style="width:100%;display:block;border:1px solid rgba(154,122,58,0.2);"/>
+    <div style="position:absolute;bottom:0;left:0;right:0;padding:1.25rem 1.5rem;background:linear-gradient(to top,rgba(44,32,24,0.85),transparent);">
+      <div style="font-family:'Cinzel',serif;font-size:0.72rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-light);">Wendy &amp; Luis</div>
+      <div style="font-size:0.68rem;letter-spacing:0.12em;color:rgba(244,239,230,0.6);margin-top:0.2rem;">Founders · Ascension Era</div>
+    </div>
+  </div>
+
+  <div class="founders-grid">
+    <div class="founder-card">
+      <span class="founder-moon">🌑</span>
+      <div class="founder-role">Community member · Sociologist · Pattern breaker</div>
+      <div class="founder-name">Wendy</div>
+      <p>Mexican American woman. California born. I am a bridge — not because I have the answers, but because I've walked the terrain and I know how to hold space while someone else finds their footing.</p>
+      <p>Plant medicine, pendulums, community building, emotions ready to be released. I do what calls me. I show up because showing up is the practice.</p>
+    </div>
+    <div class="founder-card">
+      <span class="founder-moon">🌕</span>
+      <div class="founder-role">Community member · Tradesman · Meditation practitioner</div>
+      <div class="founder-name">Luis</div>
+      <p>Ecuadorian Mexican Cuban. Golf, tradesman, advocate, rooted in indigenous ancestry. Currently completing a group meditation practicum studying under Jack Kornfield and Tara Brach — not to become an authority, but to go deeper into the practice and eventually share it.</p>
+      <p>No hierarchies. No shortcuts. Just the work, lived daily with intention. The path chose me. 🌕</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRACTICUM ANNOUNCEMENT -->
+<section class="practicum" id="practicum">
+  <div class="practicum-inner">
+    <div class="practicum-emblem">
+      <span class="moon-phases">🌑 🌒 🌓 🌔 🌕</span>
+      <div class="coming-soon-badge">Coming Soon</div>
+      <div class="teacher-names">
+        Group Meditation<br>
+        with Luis<br><br>
+        Studying under<br>
+        Jack Kornfield<br>
+        &amp; Tara Brach
+      </div>
+    </div>
+    <div class="practicum-text">
+      <div class="section-label">An announcement</div>
+      <h2>Group meditation<br>is <em>coming.</em></h2>
+      <p>Luis is currently completing a group meditation practicum studying under Jack Kornfield and Tara Brach — two of the most respected teachers in Western mindfulness. He is not doing this to become an authority. He is doing this because the practice called him, and he wants to go deeper before he shares it.</p>
+      <p>Group meditation sessions are coming — held without hierarchy, rooted in compassion, and grounded in the belief that you don't need a teacher to tell you who you are. You need space to listen for yourself.</p>
+      <p>If you feel called and want to be among the first to know when sessions open, leave your name in the form below.</p>
+      <div class="practicum-cta">
+        <a class="btn-warm" href="#sessions">Get notified ↓</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEES -->
+<section class="tees" id="tees">
+  <div class="tees-header">
+    <div class="section-label" style="color:var(--stone-light);">The collection</div>
+    <h2>Wear <em>the work</em></h2>
+    <p>Each design is a conversation, a signal, a mirror. If it speaks to you — you already know why.</p>
+  </div>
+  <div class="tees-grid">
+
+    <a class="tee-card" href="https://www.etsy.com/listing/4483277698/mr-bufo-iykyk-unisex-graphic-tee" target="_blank">
+      <span class="tee-glyph">🐸</span>
+      <div class="tee-name">Mr. Bufo | IYKYK</div>
+      <span class="tee-community">Plant medicine · Conscious community</span>
+      <p class="tee-desc">Mr. Bufo doesn't call everyone. And he doesn't need to explain himself to those he doesn't. If the medicine found you — if you've sat in that fire and come back cracked open and more whole than you've ever been — you know that the ceremony was just the door. Integration is where the real work lives.</p>
+      <div class="tee-price">$33.00 <small>· S–2XL · Black, Military Green · free shipping $35+</small></div>
+      <div class="tee-etsy-link">View on Etsy ↗</div>
+    </a>
+
+    <a class="tee-card" href="https://www.etsy.com/listing/4481669419/heavily-meditated-shirt-funny-meditation" target="_blank">
+      <span class="tee-glyph">🧘</span>
+      <div class="tee-name">Heavily Meditated</div>
+      <span class="tee-community">Spiritual humor · Mindfulness · Yoga lovers</span>
+      <p class="tee-desc">Not all who wander are lost. Some of us are just deeply, heavily, unapologetically meditated. For the one with the dedicated altar, the crystals, the breathwork — and still can't sit still for five minutes. Or the one who genuinely does the work and needs the world to know.</p>
+      <div class="tee-price">$24.44 <small>· S–4XL · 11 colors · free shipping $35+</small></div>
+      <div class="tee-etsy-link">View on Etsy ↗</div>
+    </a>
+
+    <a class="tee-card" href="https://www.etsy.com/listing/4481612816/psssst-your-trauma-is-showing-shirt" target="_blank">
+      <span class="tee-glyph">💬</span>
+      <div class="tee-name">Psssst. Your Trauma Is Showing.</div>
+      <span class="tee-community">Retro comic · Dark humor · Therapy culture</span>
+      <p class="tee-desc">A cheeky, retro-style tee that speaks in a whisper and lands like a punchline. A vintage comic-panel print: a woman leaning in to say "pssst. your TRAUMA is showing." Subtly subversive, soft all-day wear. An easy way to wear dark humor with a wink at gatherings where sarcasm and honesty are currency.</p>
+      <div class="tee-price">$27.77 <small>· XS–5XL · 8 colors · free shipping $35+</small></div>
+      <div class="tee-etsy-link">View on Etsy ↗</div>
+    </a>
+
+    <a class="tee-card" href="https://www.etsy.com/listing/4482252268/check-yoself-before-you-astral-project" target="_blank">
+      <span class="tee-glyph">✨</span>
+      <div class="tee-name">Check Yo'self Before You Astral Project Yo'self</div>
+      <span class="tee-community">Spiritual humor · Ancestral energy · Grounding</span>
+      <p class="tee-desc">She said what the ancestors couldn't. An original design honoring the connection between our modern selves and our ancestral spirit — two versions of the same soul, connected by copal smoke, held together by lineage. For everyone who has ever tried to ascend past a situation they hadn't finished processing yet.</p>
+      <div class="tee-price">$27.77 <small>· XS–2XL · Black, Athletic Heather, Natural · free shipping $35+</small></div>
+      <div class="tee-etsy-link">View on Etsy ↗</div>
+    </a>
+
+    <div class="tee-card tee-coming">
+      <span class="tee-glyph" style="opacity:0.3;">＋</span>
+      <div class="tee-name">More dropping soon</div>
+      <span class="tee-community">Follow @ascensioneraofficial for new releases</span>
+      <p class="tee-desc" style="text-align:center;color:var(--stone-light);">New designs in the works. Follow on IG or visit the Etsy shop to see everything that's live.</p>
+    </div>
+
+  </div>
+  <div class="tees-cta">
+    <a class="btn-warm" href="https://www.etsy.com/shop/ascensionera" target="_blank">Shop All on Etsy ↗</a>
+    <p class="tees-note">Fulfilled via Printify · Unisex sizing · Printed on demand · Free shipping on US orders $35+</p>
+  </div>
+</section>
+
+<!-- SESSIONS + FORM -->
+<section class="sessions" id="sessions">
+  <div class="sessions-inner">
+    <div class="sessions-text">
+      <div class="section-label">Walk with us</div>
+      <h2>If you feel <em>called</em></h2>
+      <p class="body-p">We don't offer programs. We don't position ourselves as the answer. If something here resonates and you feel called to walk alongside us for part of your journey — we're here for that. We've sat in the same discomfort. We've asked the same questions. We are not above the work. We are in it.</p>
+      <p class="body-p">What we offer are containers — space for whatever you're carrying. Energy work, honest conversation, meditation, or simply the act of being witnessed. Whatever comes up is what your higher self has called to light. We are not forcing healing.</p>
+      <div style="margin:2rem 0;padding:1.5rem 1.75rem;border-left:2px solid var(--gold-dim);background:rgba(201,168,76,0.05);">
+        <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.15rem;line-height:1.75;font-weight:300;color:var(--earth);margin-bottom:0.6rem;">"This is not capitalism.<br>This is reciprocity."</p>
+        <p style="font-size:0.78rem;letter-spacing:0.08em;font-weight:300;color:var(--stone);">Energy exchange. Everything is energy. If you feel called, we meet you there.</p>
+      </div>
+      <div class="session-list">
+        <div class="session-item">
+          <div class="s-dot"></div>
+          <div>
+            <h4>Energy Healing Sessions</h4>
+            <p>One-on-one or partner sessions focused on energetic clearing, grounding, and alignment — held with care, without performance.</p>
+          </div>
+        </div>
+        <div class="session-item">
+          <div class="s-dot"></div>
+          <div>
+            <h4>Platicas</h4>
+            <p>Meaningful conversation as practice. No agenda, no script — honest dialogue that helps you locate yourself in your own story.</p>
+          </div>
+        </div>
+        <div class="session-item">
+          <div class="s-dot"></div>
+          <div>
+            <h4>Collaborative Sessions</h4>
+            <p>Sessions where Wendy and Luis hold space together — energy work, ancestral awareness, and grounded reflection woven into one experience.</p>
+          </div>
+        </div>
+        <div class="session-item">
+          <div class="s-dot" style="background:var(--sage-dark);"></div>
+          <div>
+            <h4>Group Meditation — Coming Soon</h4>
+            <p>Luis is completing his meditation practicum under Jack Kornfield and Tara Brach. Group sessions opening soon. Leave your name below and we'll reach out first.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-box" id="contact">
+      <h3>Book a Session</h3>
+      <p class="form-sub">Fill out the form and we'll be in touch. No rush, no pressure — just tell us where you are.</p>
+      <div id="the-form">
+        <div class="form-row-2">
+          <div class="fg">
+            <label>First name</label>
+            <input type="text" id="f-name" placeholder="Your name"/>
+          </div>
+          <div class="fg">
+            <label>Email</label>
+            <input type="email" id="f-email" placeholder="your@email.com"/>
+          </div>
+        </div>
+        <div class="fg">
+          <label>What are you looking for?</label>
+          <select id="f-type">
+            <option value="" disabled selected>Select a session type</option>
+            <option>Energy healing session</option>
+            <option>Platica (one-on-one conversation)</option>
+            <option>Collaborative session — Wendy + Luis</option>
+            <option>Group meditation — notify me when available</option>
+            <option>Not sure yet — I just need a space</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>Where are you right now?</label>
+          <textarea id="f-message" placeholder="No need to have it figured out. Share what brought you here, what you're sitting with, or what you're looking for..."></textarea>
+        </div>
+        <div class="fg">
+          <label>Instagram (optional)</label>
+          <input type="text" id="f-ig" placeholder="@yourhandle"/>
+        </div>
+        <button class="btn-submit" onclick="submitForm()">Send It ↗</button>
+        <p class="form-note">We respond within a few days. Whatever comes up is what your higher self has called to light — we are not forcing anything. This is reciprocity, not a transaction. Energy exchange. Everything is energy.</p>
+      </div>
+      <div class="form-success" id="form-success">
+        <span class="fs-title">We received your message.</span>
+        <p>We'll be in touch soon. In the meantime — keep doing the work. You already know how.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="roots">
+  <div class="roots-inner">
+    <div class="section-label" style="color:var(--stone-light);">Welcome to the era</div>
+    <blockquote>"Consciousness is not a destination —<br>it's a <em>practice</em>, lived fully,<br>in every direction."</blockquote>
+    <div class="roots-attr">Ascension Era · @ascensioneraofficial</div>
+    <div class="roots-btns">
+      <a class="btn-warm" href="https://ascensionera.etsy.com" target="_blank">Shop the Collection</a>
+      <a class="btn-outline" style="color:var(--bone-dim);border-color:rgba(212,202,184,0.3);" href="#contact">Book a Session</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo"><img src="ae-logo-bw.png" alt="Ascension Era"/></div>
+  <div class="footer-links">
+    <a href="https://ascensionera.etsy.com" target="_blank">Shop Etsy ↗</a>
+    <a href="https://instagram.com/ascensioneraofficial" target="_blank">@ascensioneraofficial</a>
+    <a href="/cdn-cgi/l/email-protection#3542505b514c7557595a5a58425059595b5046465959561b5a4752">Contact Us</a>
+    <a href="https://bloomwellnessllc.org">Bloom Wellness LLC</a>
+  </div>
+  <div class="footer-links">
+    <a href="#philosophy">Philosophy</a>
+    <a href="#founders">Who We Are</a>
+    <a href="#practicum">Group Meditation</a>
+    <a href="#tees">The Tees</a>
+    <a href="#sessions">Sessions</a>
+  </div>
+  <div class="footer-copy">© 2026 Ascension Era · A Bloom Wellness LLC venture · bloomwellnessllc.org</div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+function submitForm() {
+  const name = document.getElementById('f-name').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+  const type = document.getElementById('f-type').value;
+  const msg = document.getElementById('f-message').value.trim();
+  if (!name || !email || !type || !msg) {
+    alert('Please fill in all required fields before sending.');
+    return;
+  }
+  const mailto = 'mailto:wendy@bloomwellnessllc.org'
+    + '?subject=' + encodeURIComponent('Ascension Era Inquiry — ' + type)
+    + '&body=' + encodeURIComponent(
+        'Name: ' + name + '\n'
+      + 'Email: ' + email + '\n'
+      + 'Session type: ' + type + '\n'
+      + 'Instagram: ' + (document.getElementById('f-ig').value || 'N/A') + '\n\n'
+      + 'Message:\n' + msg
+    );
+  window.location.href = mailto;
